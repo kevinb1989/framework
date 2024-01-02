@@ -270,6 +270,21 @@ class Builder
     }
 
     /**
+     * Determine if the given table has a foreign key with a given name.
+     *
+     * @param  string  $table
+     * @param  string  $key
+     * @return bool
+     */
+    public function hasForeignKey($table, $key)
+    {
+        $foreignKeys = $this->getForeignKeys($table);
+
+        return collect($foreignKeys)
+            ->contains(fn ($foreignKey) => $foreignKey['name'] = $key);
+    }
+
+    /**
      * Execute a table builder callback if the given table has a given column.
      *
      * @param  string  $table
